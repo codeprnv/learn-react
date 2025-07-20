@@ -1,9 +1,20 @@
-import React from "react";
 import { useColor } from "./context/ColorContext";
 import ColorButtons from "./components/ColorButtons";
+import { useMediaQuery } from "react-responsive";
 
 const App = () => {
 	const { color, setColor } = useColor();
+	const colorsArray = [
+		"Red",
+		"Yellow",
+		"Green",
+		"Lavender",
+		"Skyblue",
+		"Pink",
+		"Black",
+	];
+	const isMobile = useMediaQuery({ maxWidth: 767 });
+
 	const changeColor = (e) => {
 		const val = e.target.value;
 		try {
@@ -33,14 +44,17 @@ const App = () => {
 				className="outline-red-400 outline-2 focus:outline-2 focus:outline-white rounded-lg p-2"
 				onChange={changeColor}
 			/>
-			<div className="bg-white rounded-xl p-4 text-black w-fit fixed bottom-20 h-fit">
-				<div className="flex gap-8 items-center w-full justify-center">
-					<ColorButtons colorName="Red" />
-					<ColorButtons colorName="Yellow" />
-					<ColorButtons colorName="Green" />
-					<ColorButtons colorName="Lavender" />
-					<ColorButtons colorName="Skyblue" />
-					<ColorButtons colorName="Black" />
+			<div className="bg-white rounded-xl p-2 md:p-4 text-black w-fit fixed bottom-10 md:bottom-20 h-fit">
+				<div className="flex gap-2 md:gap-8 items-center w-full justify-center">
+					{isMobile
+						? colorsArray
+								.slice(0, 4)
+								.map((color, index) => (
+									<ColorButtons colorName={color} key={index} />
+								))
+						: colorsArray.map((color, index) => (
+								<ColorButtons colorName={color} key={index} />
+						  ))}
 				</div>
 			</div>
 		</div>

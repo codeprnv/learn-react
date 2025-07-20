@@ -1,1 +1,5 @@
 @import 'tailwindcss';
+
+body {
+    @apply min-w-[375px] h-full w-full bg-black
+}
