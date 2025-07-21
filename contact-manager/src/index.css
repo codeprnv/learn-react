@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+body {
+	@apply bg-[#4a5759] font-medium w-full h-full min-w-[375px];
+}
